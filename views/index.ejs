@@ -9,6 +9,11 @@
   </head>
   <body>
     <h1>Hello <%= locals.text %> </h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+      <label for="file">File</label>
+      <input id="file" name="ipynb" type="file"/>
+      <button>Upload</button>
+    </form>
     <!-- <script src="index.js"></script> -->
   </body>
 </html>
