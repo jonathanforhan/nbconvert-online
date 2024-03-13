@@ -46,7 +46,7 @@
     }
 
     #app {
-      max-width: 1280px;
+      width: 100%;
       margin: 0 auto;
       padding: 2rem;
       text-align: center;
@@ -106,6 +106,9 @@
       background-color: #1a1a1a;
       cursor: pointer;
       transition: border-color 0.25s;
+      max-width: 15%;
+      min-width: 18em;
+      margin: 0 0 0.5em 0;
     }
 
     input:hover {
@@ -122,9 +125,40 @@
     }
 
     code {
-      display: block;
-      white-space: pre-wrap;
+      display: flex;
       text-align: left;
+      justify-content: center;
+    }
+
+    .tabs {
+      margin: 2rem 0;
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .tabs__label {
+      padding: 10px 16px;
+      cursor: pointer;
+    }
+
+    .tabs__radio {
+      display: none;
+    }
+
+    .tabs__content {
+      order: 1;
+      width: 100%;
+      display: none;
+      margin: 1em;
+    }
+
+    .tabs__radio:checked+.tabs__label {
+      font-weight: bolder;
+      border-bottom: 2px solid;
+    }
+
+    .tabs__radio:checked+.tabs__label+.tabs__content {
+      display: initial;
     }
 
     @media (prefers-color-scheme: light) {
@@ -152,18 +186,42 @@
   <div id="app">
     <h1>nbconvert online</h1>
     <% if (locals.content) { %>
-      <div>
+      <div style="margin-bottom: 0.5em;">
         <%= locals.content %>
       </div>
-      <code>
-        <%= locals.errorMessage %>
-      </code>
       <% } else { %>
-        <form action="/upload" method="post" enctype="multipart/form-data">
-          <input id="file" name="ipynb" type="file" accept=".ipynb" />
-          <button>Upload</button>
-        </form>
+        <div class="tabs" style="justify-content: center">
+          <!-- ipynb tab -->
+          <input type="radio" class="tabs__radio" name="input-tabs" id="ipynb-tab" checked>
+          <label for="ipynb-tab" class="tabs__label">ipynb</label>
+          <div class="tabs__content">
+            <form action="/upload-file" method="post" enctype="multipart/form-data">
+              <input id="file" name="ipynb" type="file" accept=".ipynb" placeholder="No file chosen" />
+              <button>Convert</button>
+            </form>
+          </div>
+          <!-- colab tab -->
+          <input type="radio" class="tabs__radio" name="input-tabs" id="colab-tab">
+          <label for="colab-tab" class="tabs__label">colab</label>
+          <div class="tabs__content">
+            <form action="/upload-url" method="post" enctype="multipart/form-data">
+              <input id="file" name="gdown" type="text" placeholder="Google colab url" />
+              <button>Convert</button>
+            </form>
+          </div>
+        </div>
         <% } %>
+          <div>
+            <% if (locals.errorMessageFmt) { %>
+              <code>
+                <%= locals.errorMessage %>
+              </code>
+              <% } else { %>
+                <code style="white-space: pre-wrap;">
+                  <%= locals.errorMessage %>
+                </code>
+                <% } %>
+          </div>
   </div>
 </body>
 
