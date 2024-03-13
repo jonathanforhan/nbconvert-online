@@ -2,10 +2,7 @@ const express = require("express");
 const http = require("http");
 const https = require("https");
 const fileUpload = require("express-fileupload");
-const { spawn } = require("child_process");
 const fs = require("fs");
-const path = require("path");
-const { randomUUID } = require("crypto");
 const app = express();
 
 const download = require("./routes/download");
