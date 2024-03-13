@@ -191,21 +191,21 @@
       </div>
       <% } else { %>
         <div class="tabs" style="justify-content: center">
-          <!-- ipynb tab -->
-          <input type="radio" class="tabs__radio" name="input-tabs" id="ipynb-tab" checked>
-          <label for="ipynb-tab" class="tabs__label">ipynb</label>
-          <div class="tabs__content">
-            <form action="/upload-file" method="post" enctype="multipart/form-data">
-              <input id="file" name="ipynb" type="file" accept=".ipynb" placeholder="No file chosen" />
-              <button>Convert</button>
-            </form>
-          </div>
           <!-- colab tab -->
-          <input type="radio" class="tabs__radio" name="input-tabs" id="colab-tab">
+          <input type="radio" class="tabs__radio" name="input-tabs" id="colab-tab" checked>
           <label for="colab-tab" class="tabs__label">colab</label>
           <div class="tabs__content">
             <form action="/upload-url" method="post" enctype="multipart/form-data">
               <input id="file" name="gdown" type="text" placeholder="Google colab url" />
+              <button>Convert</button>
+            </form>
+          </div>
+          <!-- ipynb tab -->
+          <input type="radio" class="tabs__radio" name="input-tabs" id="ipynb-tab">
+          <label for="ipynb-tab" class="tabs__label">ipynb</label>
+          <div class="tabs__content">
+            <form action="/upload-file" method="post" enctype="multipart/form-data">
+              <input id="file" name="ipynb" type="file" accept=".ipynb" placeholder="No file chosen" />
               <button>Convert</button>
             </form>
           </div>
